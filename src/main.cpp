@@ -12,6 +12,8 @@
 // [Name]               [Type]        [Port(s)]
 // Controller1          controller                    
 // Drivetrain           drivetrain    1, 2            
+// Motor3               motor         3               
+// Motor4               motor         4               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -40,11 +42,62 @@ void turnRobot(){
   } 
 }
 
+// void intakeOn(bool enabled){
+//   if (enabled){
+//     Motor3.spin(forward);
+//   }
+// }
+
+void intakeForward(){
+  Motor3.spin(forward);
+}
+
+void intakeReverse(){
+  Motor3.spin(reverse);
+}
+
+void climbUp(){
+  Motor4.spin(forward);
+}
+
+void climbDown(){
+  Motor4.spin(reverse);
+}
+
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
+
+  vex::controller::button intake1 = Controller1.ButtonR1;
+  vex::controller::button intake2 = Controller1.ButtonR2;
+  vex::controller::button climb1 = Controller1.ButtonL1;
+  vex::controller::button climb2 = Controller1.ButtonL2;
   
   Drivetrain.setDriveVelocity(50,percent);
+  Motor3.setVelocity(50,percent);
+  Motor4.setVelocity(50,percent);
 
   Controller1.Axis3.changed(driveRobot);
+
+  while (true){
+    if (intake1.pressing()){
+      intakeForward();
+    }
+    else if (intake2.pressing()){
+      intakeReverse();
+    }
+    else{
+      Motor3.stop();
+    }
+
+    if (climb1.pressing()){
+      climbUp();
+    }
+    else if (climb2.pressing()){
+      climbDown();
+    }
+    else{
+      Motor4.stop();
+    }
+  }
 }
