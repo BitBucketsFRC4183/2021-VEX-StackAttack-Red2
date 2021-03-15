@@ -13,7 +13,7 @@
 // Controller1          controller                    
 // Drivetrain           drivetrain    1, 2            
 // Motor3               motor         3               
-// Motor4               motor         4               
+// Motor8               motor         8               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -57,11 +57,11 @@ void intakeReverse(){
 }
 
 void climbUp(){
-  Motor4.spin(forward);
+  Motor8.spin(forward);
 }
 
 void climbDown(){
-  Motor4.spin(reverse);
+  Motor8.spin(reverse);
 }
 
 int main() {
@@ -75,7 +75,7 @@ int main() {
   
   Drivetrain.setDriveVelocity(50,percent);
   Motor3.setVelocity(50,percent);
-  Motor4.setVelocity(50,percent);
+  Motor8.setVelocity(50,percent);
 
   Controller1.Axis3.changed(driveRobot);
 
@@ -97,7 +97,7 @@ int main() {
       climbDown();
     }
     else{
-      Motor4.stop();
+      Motor8.stop();
     }
   }
 }
