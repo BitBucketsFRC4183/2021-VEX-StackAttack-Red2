@@ -97,7 +97,7 @@ int main() {
       climbDown();
     }
     else{
-      Motor8.stop();
+      Motor8.setStopping(hold);
     }
   }
 }
