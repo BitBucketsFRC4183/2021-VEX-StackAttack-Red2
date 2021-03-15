@@ -49,19 +49,19 @@ void turnRobot(){
 // }
 
 void intakeForward(){
-  Motor3.spin(forward);
-}
-
-void intakeReverse(){
-  Motor3.spin(reverse);
-}
-
-void climbUp(){
   Motor8.spin(forward);
 }
 
-void climbDown(){
+void intakeReverse(){
   Motor8.spin(reverse);
+}
+
+void climbUp(){
+  Motor3.spin(forward);
+}
+
+void climbDown(){
+  Motor3.spin(reverse);
 }
 
 int main() {
@@ -87,7 +87,7 @@ int main() {
       intakeReverse();
     }
     else{
-      Motor3.stop();
+      Motor8.stop();
     }
 
     if (climb1.pressing()){
@@ -97,7 +97,7 @@ int main() {
       climbDown();
     }
     else{
-      Motor8.stop();
+      Motor3.stop();
     }
   }
 }
