@@ -12,8 +12,8 @@ controller Controller1 = controller(primary);
 motor LeftDriveSmart = motor(PORT1, ratio18_1, false);
 motor RightDriveSmart = motor(PORT2, ratio18_1, true);
 drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 295, 40, mm, 1);
-motor Motor3 = motor(PORT3, ratio18_1, false);
 motor Motor8 = motor(PORT8, ratio18_1, false);
+motor Motor3 = motor(PORT3, ratio18_1, false);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
@@ -27,15 +27,15 @@ int rc_auto_loop_function_Controller1() {
   // update the motors based on the input values
   while(true) {
     if(RemoteControlCodeEnabled) {
-      // check the ButtonR1/ButtonR2 status to control Motor3
+      // check the ButtonR1/ButtonR2 status to control Motor8
       if (Controller1.ButtonR1.pressing()) {
-        Motor3.spin(forward);
+        Motor8.spin(forward);
         Controller1RightShoulderControlMotorsStopped = false;
       } else if (Controller1.ButtonR2.pressing()) {
-        Motor3.spin(reverse);
+        Motor8.spin(reverse);
         Controller1RightShoulderControlMotorsStopped = false;
       } else if (!Controller1RightShoulderControlMotorsStopped) {
-        Motor3.stop();
+        Motor8.stop();
         // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
         Controller1RightShoulderControlMotorsStopped = true;
       }
