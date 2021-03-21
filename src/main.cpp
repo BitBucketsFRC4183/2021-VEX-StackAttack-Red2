@@ -11,7 +11,7 @@
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
 // Controller1          controller                    
-// Drivetrain           drivetrain    1, 2            
+// Drivetrain           drivetrain    10, 1           
 // Motor3               motor         3               
 // Motor8               motor         8               
 // ---- END VEXCODE CONFIGURED DEVICES ----
@@ -64,20 +64,29 @@ void climbDown(){
   Motor8.spin(reverse);
 }
 
-int main() {
-  // Initializing Robot Configuration. DO NOT REMOVE!
-  vexcodeInit();
+void auton(){
+  Drivetrain.setDriveVelocity(50,percent);
+  Drivetrain.driveFor(forward, 10, inches);
+  Drivetrain.driveFor(reverse, 10, inches);
+}
+// void testAutonManual(){
+//   Brain.Screen.print("Starting Autonomous");
 
-  vex::controller::button intake1 = Controller1.ButtonR1;
-  vex::controller::button intake2 = Controller1.ButtonR2;
-  vex::controller::button climb1 = Controller1.ButtonL1;
-  vex::controller::button climb2 = Controller1.ButtonL2;
-  
+//   auton();
+// }
+
+void teleop(){
   Drivetrain.setDriveVelocity(50,percent);
   Motor3.setVelocity(50,percent);
   Motor8.setVelocity(50,percent);
 
   Controller1.Axis3.changed(driveRobot);
+
+  
+  vex::controller::button intake1 = Controller1.ButtonR1;
+  vex::controller::button intake2 = Controller1.ButtonR2;
+  vex::controller::button climb1 = Controller1.ButtonL1;
+  vex::controller::button climb2 = Controller1.ButtonL2;
 
   while (true){
     if (intake1.pressing()){
@@ -100,4 +109,15 @@ int main() {
       Motor8.setStopping(hold);
     }
   }
+}
+int main() {
+  // Initializing Robot Configuration. DO NOT REMOVE!
+  vexcodeInit();
+  
+  auton();
+  teleop();
+
+  
+  
+
 }
